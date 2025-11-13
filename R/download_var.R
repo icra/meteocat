@@ -22,7 +22,7 @@ download_var <- function(
     )
   }
 
-  tidytable::map_dfr(years, \(year) {
+  df <- tidytable::map_dfr(years, \(year) {
     download_var_year(code_variable, year)
   }) |>
     tidytable::summarize(
@@ -32,4 +32,6 @@ download_var <- function(
       .by = id_station
     ) |>
     tidytable::drop_na(tidytable::everything())
+
+  df |> tidytable::select(order(colnames(df)))
 }

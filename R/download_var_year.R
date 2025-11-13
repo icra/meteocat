@@ -25,34 +25,36 @@ download_var_year <- function(code_variable, year, api_key = get_api_key()) {
     ))
     return(NULL)
   }
+  df <- suppressMessages(
+    httr2::resp_body_json(req) |>
+      tidytable::map_dfr(\(x) {
+        df <- tidytable::tidytable(id_station = x$codiEstacio)
+        .valors <- tidytable::map_dfc(x$valors, \(y) {
+          m <- paste0("m", stringr::str_sub(y$data, 6, 7))
 
-  httr2::resp_body_json(req) |>
-    tidytable::map_dfr(\(x) {
-      df <- tidytable::tidytable(id_station = x$codiEstacio)
-      .valors <- tidytable::map_dfc(x$valors, \(y) {
-        m <- paste0("m", stringr::str_sub(y$data, 6, 7))
-
-        tidytable::tidytable(
-          !!m := y$valor
-        )
-      })
-      tidytable::bind_cols(df, .valors)
-    }) |>
-    tidytable::select(
-      id_station,
-      tidytable::any_of(c(
-        "m01",
-        "m02",
-        "m03",
-        "m04",
-        "m05",
-        "m06",
-        "m07",
-        "m08",
-        "m09",
-        "m10",
-        "m11",
-        "m12"
-      ))
-    )
+          tidytable::tidytable(
+            !!m := y$valor
+          )
+        })
+        tidytable::bind_cols(df, .valors)
+      }) |>
+      tidytable::select(
+        id_station,
+        tidytable::any_of(c(
+          "m01",
+          "m02",
+          "m03",
+          "m04",
+          "m05",
+          "m06",
+          "m07",
+          "m08",
+          "m09",
+          "m10",
+          "m11",
+          "m12"
+        ))
+      )
+  )
+  df |> tidytable::select(order(colnames(df)))
 }
