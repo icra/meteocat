@@ -37,7 +37,7 @@ calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   grid_sf$slope <- terra::extract(terra::rast(slope), grid_sf_xy)[, 1]
   grid_sf$aspect <- terra::extract(terra::rast(aspect), grid_sf_xy)[, 1]
   grid_sf$dist_sea <- distance_to_sea(grid_sf, coastline)
-  grid_sf$cos_lat <- cos(grid_sf_xy[, 2] * pi / 180) |> pull(1)
+  grid_sf$cos_lat <- cos(grid_sf_xy[, 2] * pi / 180)
 
   grid_sf |>
     tidytable::select(tidytable::any_of(c(
