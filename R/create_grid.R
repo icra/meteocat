@@ -6,6 +6,7 @@
 #' @param aspect Arxiu raster d'orientacions. Es pot obtenir amb \link{get_terrain}.
 #' @param coastline Objecte sf que representa la línia de costa.
 #' @returns Una tidytable amb les mateixes files que `grid_sf` i amb columnes corresponents a les dades utilitzades per \link{interpolate}
+#' @export
 
 calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   if ("id_station" %in% colnames(grid_sf)) {
