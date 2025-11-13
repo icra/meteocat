@@ -15,7 +15,7 @@ calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   }
 
   if (inherits(grid_sf, "sf")) {
-    grid_sf_xy <- sf::st_transform(4326) |> sf::st_coordinates(grid_sf)
+    grid_sf_xy <- grid_sf |> sf::st_transform(4326) |> sf::st_coordinates()
   } else {
     cols <- c("x", "X", "y", "Y")
     if (sum(cols %in% grid_sf) < 2) {
