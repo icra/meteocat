@@ -6,6 +6,7 @@
 #' @param aspect Arxiu raster d'orientacions. Es pot obtenir amb \link{get_terrain}.
 #' @param coastline Objecte sf que representa la línia de costa.
 #' @returns Una tidytable amb les mateixes files que `grid_sf` i amb columnes corresponents a les dades utilitzades per \link{interpolate}
+#' @export
 
 calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   if ("id_station" %in% colnames(grid_sf)) {
@@ -16,6 +17,12 @@ calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   if (inherits(grid_sf, "sf")) {
     grid_sf_xy <- sf::st_coordinates(grid_sf)
   } else {
+    cols <- c("x", "X", "y", "Y")
+    if (sum(cols %in% grid_sf) < 2) {
+      rlang::abort(
+        "grid_sf ha de ser un objecte sf o tenir coordenades com a x i y"
+      )
+    }
     grid_sf_xy <- grid_sf |>
       tidytable::select(any_of(c("x", "X", "y", "Y"))) |>
       as.matrix()
@@ -30,7 +37,7 @@ calculate_features <- function(grid_sf, mde, slope, aspect, coastline) {
   grid_sf$slope <- terra::extract(terra::rast(slope), grid_sf_xy)[, 1]
   grid_sf$aspect <- terra::extract(terra::rast(aspect), grid_sf_xy)[, 1]
   grid_sf$dist_sea <- distance_to_sea(grid_sf, coastline)
-  grid_sf$cos_lat <- cos(grid_sf_xy[, 2])
+  grid_sf$cos_lat <- cos(grid_sf_xy[, 2] * pi / 180) |> pull(1)
 
   grid_sf |>
     tidytable::select(tidytable::any_of(c(
