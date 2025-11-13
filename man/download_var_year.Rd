@@ -7,7 +7,7 @@
 download_var_year(code_variable, year, api_key = get_api_key())
 }
 \arguments{
-\item{code_variable}{Codi de la variable obtingut com \code{download_code_variables()}}
+\item{code_variable}{Codi de la variable obtingut com \link{download_code_variables}.}
 
 \item{year}{Any que es vol descarregar}
 

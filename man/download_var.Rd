@@ -12,11 +12,11 @@ download_var(
 )
 }
 \arguments{
-\item{variable}{Acrònim de la variable obtinguda de \code{download_code_variables()}}
+\item{variable}{Acrònim de la variable obtinguda de \link{download_code_variables}.}
 
 \item{years}{Un vector amb tots els anys que volem incloure a la sèrie temporal}
 
-\item{variables}{La taula de variables que s'obté amb \code{download_code_variables()}}
+\item{variables}{La taula de variables que s'obté amb \link{download_code_variables}.}
 
 \item{api_key}{La clau API del meteocat. Si es guarda a .Renviron com a 'meteocat_key' s'estira automàticament amb \code{get_api_key()}}
 }

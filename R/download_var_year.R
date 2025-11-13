@@ -1,5 +1,5 @@
 #' Descarrega una variable per un any concret
-#' @param code_variable Codi de la variable obtingut com `download_code_variables()`
+#' @param code_variable Codi de la variable obtingut com \link{download_code_variables}.
 #' @param year Any que es vol descarregar
 #' @param api_key La clau API del meteocat. Si es guarda a .Renviron com a 'meteocat_key' s'estira automàticament amb `get_api_key()`
 #' @returns Una tidytable amb una columna per mes i una fila per estació.

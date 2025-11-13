@@ -1,7 +1,7 @@
 #' Descarrega la mitjana d'una sèrie multianual
-#' @param variable Acrònim de la variable obtinguda de `download_code_variables()`
+#' @param variable Acrònim de la variable obtinguda de \link{download_code_variables}.
 #' @param years Un vector amb tots els anys que volem incloure a la sèrie temporal
-#' @param variables La taula de variables que s'obté amb `download_code_variables()`
+#' @param variables La taula de variables que s'obté amb \link{download_code_variables}.
 #' @param api_key La clau API del meteocat. Si es guarda a .Renviron com a 'meteocat_key' s'estira automàticament amb `get_api_key()`
 #' @returns Una tidytable amb una columna per mes i una fila per estació.
 #' @export
