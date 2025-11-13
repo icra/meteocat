@@ -5,6 +5,7 @@
 #' @param ... altres arguments per `elevatr::get_elev_raster`.
 #' @export
 #' @returns El destí de l'arxiu de forma invisible
+
 get_mde <- function(area_estudi, path, zoom = 12, ...) {
   if (!(requireNamespace("elevatr", quietly = TRUE))) {
     rlang::abort("Cal instal·lar `elevatr`")
